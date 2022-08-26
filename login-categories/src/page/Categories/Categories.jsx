@@ -21,6 +21,7 @@ export const Categories = () => {
           <Nav>
             <Nav.Link className="aling-text" href="/categorias">Categorias</Nav.Link>
             <Nav.Link href="/listacategorias">Lista de Categorias</Nav.Link>
+            <Nav.Link href="/profile">Perfil</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

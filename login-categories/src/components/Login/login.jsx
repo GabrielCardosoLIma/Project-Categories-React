@@ -56,6 +56,7 @@ export function Login() {
         // })
         setStatus({ loading: false });
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", response.data.user);
         signIn(true);
         return history.push("/categorias");
       })
