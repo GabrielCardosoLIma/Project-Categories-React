@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import api from '../../services/api';
 import { useHistory } from 'react-router-dom';
-import { Form, Button, Container, Alert, FloatingLabel  } from 'react-bootstrap';
+import { Form, Button, Container, Alert, FloatingLabel } from 'react-bootstrap';
+import { NavBar } from '../../components/UI/NavBar/NavBar'
 
 const initialValue = {
     name: '',
     email: '',
-    password: ''
 }
 
 export const UsuariosFormView = () => {
@@ -19,9 +19,9 @@ export const UsuariosFormView = () => {
         mensagem: '',
         loading: false
     })
-
     const [image, setImage] = useState("");
     const [endImage, setEndImage] = useState("");
+
 
     useEffect(() => {
 
@@ -32,11 +32,13 @@ export const UsuariosFormView = () => {
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                 },
             }
+            console.log(localStorage.getItem('user'));
 
-            await api.get("/user/view-profile" + localStorage.getItem('user'), headers)
+            await api.get("/user/view-profile/" + localStorage.getItem('user'), headers)
                 .then((response) => {
-                    if (response.data.user) {
-                        setValues(response.data.user);
+                    console.log(response.data.users);
+                    if (response.data.users) {
+                        setValues(response.data.users);
                         setEndImage(response.data.endImagem);
                     } else {
                         setStatus({
@@ -58,7 +60,7 @@ export const UsuariosFormView = () => {
                     }
                 })
         }
-         getUser();
+        getUser();
 
     }, [])
 
@@ -72,7 +74,11 @@ export const UsuariosFormView = () => {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             },
         }
-            await api.put("/user", values, headers)
+        const formData = new FormData();
+        formData.append('image', image);
+
+
+            await api.put("/user/edit-profile-image", formData, headers)
                 .then((response) => {
                     setStatus({ loading: false })
                     return history.push('/usuarios')
@@ -92,10 +98,12 @@ export const UsuariosFormView = () => {
                     }
 
                 })
-        } 
+
+    }
 
     return (
         <>
+            <NavBar />
             <Container className="box">
                 <Form onSubmit={formSubmit} className="borderForm">
                     <h2>Usuário</h2>
@@ -108,26 +116,50 @@ export const UsuariosFormView = () => {
                         : ""}
 
                     {status.loading ? <Alert variant="warning">Enviando...</Alert> : ""}
+                    <FloatingLabel
+                        controlId="floatingInput"
+                        label="Name"
+                        className="mb-3"
+                    >
+                        <Form.Control type="text" value={values.name}/>
+                    </FloatingLabel>
 
-                    <Form.Group className="mb-3" controlId="formBasicName">
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control type="name" name="name" value={values.name} placeholder="Entre com seu Nome" />
+                    <FloatingLabel
+                        controlId="floatingInput"
+                        label="E-mail"
+                        className="mb-3"
+                    >
+                        <Form.Control type="text" value={values.email}/>
+                    </FloatingLabel>
+                    <Form.Group>
+                        <Form.Label>
+                            *Imagem:
+                        </Form.Label>
+                        <Form.Control type="file" name="image"
+                        onChange={(e) => setImage(e.target.files[0])} />
                     </Form.Group>
+                    {image ? 
+                        (
+                            <img
+                                src={URL.createObjectURL(image)}
+                                alt="Imagem do usuário"
+                                width="150"
+                                height="150"
+                            />
+                        ) : (
+                            <img
+                                src={(endImage)}
+                                alt="Imagem do usuário"
+                                width="150"
+                                height="150" 
+                            />
+                        )}
 
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" name="email" value={values.email} placeholder="Entre com seu email" />
-                        <Form.Text className="text-muted">
-                            Nunca compartilharemos seu e-mail com mais ninguém.
-                        </Form.Text>
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                        {/* <Form.Check type="checkbox" label="Check me out" /> */}
-                    </Form.Group>
                     {status.loading
                         ? <Button variant="primary" disabled type="submit">Enviando...</Button>
                         : <Button variant="primary" type="submit">Enviar</Button>
                     }
+                    
 
                 </Form>
             </Container>

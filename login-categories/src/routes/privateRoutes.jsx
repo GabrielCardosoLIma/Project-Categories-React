@@ -5,7 +5,7 @@ import { Categories } from '../page/Categories/Categories';
 import { Context } from '../context/AuthContext';
 import { ListCategories } from '../page/ListCategories/listCategories';
 import { CategoriesForm } from '../page/CategoriesForm/categoriesForms';
-import {UsuariosFormView} from '../page/UsuariosForm/UsuariosForm';
+import { UsuariosFormView } from '../page/UsuariosForm/UsuariosForm';
 
 function CustomRoute({ isPrivate, ...rest}){
     const { authenticated } = useContext(Context);

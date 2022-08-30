@@ -1,26 +1,27 @@
-const usersRoutes = require('express').Router();
-const { validarToken } = require('../middlewares/Auth')
+const userRoutes = require('express').Router();
+const user = require('../controllers/user.controller');
+const { validarToken } = require('../middlewares/Auth');
 const upload = require('../middlewares/uploadImgUser');
-const Users = require('../controllers/users.controller');
 
-usersRoutes.get('/validatoken', validarToken, Users.validaToken)
+userRoutes.get("/all",  validarToken, user.findAll);
 
-usersRoutes.get('/all', validarToken, Users.findAll)
+userRoutes.get("/validarToken", user.validaToken);
 
-usersRoutes.get('/show/:id', validarToken, Users.findOne)
+userRoutes.get("/show/:id",  validarToken, user.findOne);
 
-usersRoutes.get('/view-profile/:id', validarToken, Users.viewProfile)
+userRoutes.post("/create",  user.create);
 
-usersRoutes.post('/login', Users.findOne2)
+userRoutes.post("/login", user.login);
 
-usersRoutes.post('/create', validarToken, Users.create)
+userRoutes.put("/update",  validarToken, user.update);
 
-usersRoutes.put('/update', validarToken, Users.update)
+userRoutes.put("/change-password",  validarToken, user.changepassword);
 
-usersRoutes.put('/user-senha', validarToken, Users.update2)
+userRoutes.delete("/delete/:id",  validarToken, user.delete);
 
-usersRoutes.put('/edit-profile-imatge', validarToken, upload.single('avatar'),Users.editProfileImage)
+userRoutes.put("/edit-profile-image",  validarToken, upload.single('avatar'), user.editProfileImage);
 
-usersRoutes.delete('/delete/:id', validarToken, Users.delete)
+userRoutes.get("/view-profile/:id",  validarToken, user.viewProfile);
 
-module.exports = usersRoutes;
+
+module.exports = userRoutes;

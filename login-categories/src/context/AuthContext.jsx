@@ -28,7 +28,7 @@ function AuthProvider({ children }) {
     };
 
     await api
-      .get("/users/validatoken", headers)
+      .get("/user/validarToken", headers)
       .then(() => {
         return true;
       })

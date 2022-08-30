@@ -45,8 +45,7 @@ export function Login() {
       loading: true,
     });
 
-    await api
-      .post("/users/login", user, { headers })
+    await api.post("/user/login", user, { headers })
       .then((response) => {
         // console.log(response)
         // setStatus({

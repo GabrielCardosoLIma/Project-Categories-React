@@ -3,6 +3,7 @@ var cors = require("cors");
 const app = express();
 require("dotenv").config();
 const { validarToken } = require('./middlewares/Auth')
+const path = require('path')
 // const Categories = require('./models/categories');
 // const Products = require('./models/products');
 
@@ -10,6 +11,7 @@ const router = require("./routes/index");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/files', express.static(path.resolve(__dirname, "public", "upload")));
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
