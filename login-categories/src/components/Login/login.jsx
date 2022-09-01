@@ -3,12 +3,13 @@ import React, { useState, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Alert from 'react-bootstrap/Alert';
+import api from "../../services/api";
 import { UserCircle } from "phosphor-react";
 import { Envelope  } from "phosphor-react";
 import { LockLaminated  } from "phosphor-react";
-import api from "../../services/api";
 import { useHistory } from "react-router-dom";
 import { Context } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
 import "./styles.css";
 
 export function Login() {
@@ -144,7 +145,9 @@ export function Login() {
               <a className="link-singUp-pass" href="#">Não tem cadastro? Cadastre-se</a>
             </p>
             <p>
-              <a className="link-singUp-pass" href="#">Esqueci minha senha</a>
+              <Link to="/recoverypassword" className="link-singUp-pass">
+                Esqueci minha senha
+              </Link>
             </p>
           </div>
         </Form.Group>

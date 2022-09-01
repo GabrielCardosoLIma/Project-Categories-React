@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import './style.css';
 import api from "../services/api";
 
 const Context = createContext();
@@ -49,7 +50,9 @@ function AuthProvider({ children }) {
     api.defaults.headers.Authorization = undefined;
   }
   if (loading) {
-    return <h1>Carregando...</h1>;
+    return <div className="aling-loading">
+      <div className="loading"></div>
+    </div>;
   }
 
   return (
