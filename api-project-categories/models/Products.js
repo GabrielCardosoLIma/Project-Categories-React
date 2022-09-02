@@ -35,7 +35,7 @@ Products.belongsTo(Categories, {
 })
 
 //Criar a tabela com sequelize
-// Products.sync();
+// Products.sync(); 
 
 //Excluir a tabela e criar novamente
 //Products.sync({ force: true});

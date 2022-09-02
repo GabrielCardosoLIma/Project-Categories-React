@@ -1,0 +1,9 @@
+.box-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 724px;
+    width: 100vw;
+    background-color: rgb(39, 39, 39);
+}

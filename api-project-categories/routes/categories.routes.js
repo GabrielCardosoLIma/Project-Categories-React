@@ -2,7 +2,7 @@ const categoriesRoutes = require('express').Router();
 const Categories = require('../controllers/categories.controller');
 const { validarToken } = require('../middlewares/Auth')
 
-categoriesRoutes.get('/all', validarToken ,Categories.findAll)
+categoriesRoutes.get('/all', Categories.findAll)
 
 categoriesRoutes.get('/show/:id', validarToken ,Categories.findOne)
 
