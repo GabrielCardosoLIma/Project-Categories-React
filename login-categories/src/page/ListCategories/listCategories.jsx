@@ -117,7 +117,8 @@ export const ListCategories = () => {
             </Nav.Link>
             <Nav.Link href="/listacategorias">Lista de Categorias</Nav.Link>
             <Nav.Link href="/profile">Perfil</Nav.Link>
-            <Nav.Link href="/produtos/novo">Produtos</Nav.Link>
+            <Nav.Link href="/produtos/novo">Novo Produto</Nav.Link>
+            <Nav.Link href="/listaprodutos">Produtos</Nav.Link>
             <Nav.Link href="/">Sair</Nav.Link>
           </Nav>
         </Container>
@@ -145,6 +146,7 @@ export const ListCategories = () => {
               <th>Name</th>
               <th>Descrição</th>
               <th>Funções</th>
+              <th>CategoriaId</th>
             </tr>
           </thead>
           <tbody>
@@ -152,6 +154,7 @@ export const ListCategories = () => {
               <tr key={Categories.id}>
                 <td>{Categories.id}</td>
                 <td>{Categories.name}</td>
+                <td>{Categories.description}</td>
                 <td>{Categories.description}</td>
                 <td>
                   <Button className="button-warning" variant="warning">
