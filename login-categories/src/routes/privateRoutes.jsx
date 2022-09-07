@@ -7,7 +7,7 @@ import { ListCategories } from '../page/ListCategories/listCategories';
 import { ListProducts } from '../page/Products/Products';
 import { CategoriesForm } from '../page/CategoriesForm/categoriesForms';
 import { UsuariosFormView } from '../page/UsuariosForm/UsuariosForm';
-import { ProdutosForm } from '../page/ProdutosForm/ProdutosForm';
+import { productsForm } from '../page/ProdutosForm/ProdutosForm';
 
 function CustomRoute({ isPrivate, ...rest}){
     const { authenticated } = useContext(Context);
@@ -25,9 +25,10 @@ export default function PrivateRoute(){
             <CustomRoute isPrivate path="/listacategorias" component={ListCategories} />
             <CustomRoute isPrivate path="/categories/create" component={CategoriesForm} />
             <CustomRoute isPrivate path="/categories/update/:id" component={CategoriesForm} />
-            <CustomRoute path="/listaprodutos" component={ListProducts} />
-            <CustomRoute path="/produtos/novo" component={ProdutosForm} />
-            <CustomRoute path="/profile" component={UsuariosFormView} />
+            <CustomRoute isPrivate path="/listaprodutos" component={ListProducts} />
+            <CustomRoute isPrivate path="/products/create" component={productsForm} />
+            <CustomRoute isPrivate path="/products/update/:id" component={productsForm} />
+            <CustomRoute isPrivate path="/profile" component={UsuariosFormView} />
         </Switch>
     )
 };

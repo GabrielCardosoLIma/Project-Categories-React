@@ -5,7 +5,7 @@ require('dotenv').config();
 module.exports = {
     validarToken: async function (req, res, next){
         const authHeader = req.headers.authorization;
-        const [bearer, token] = authHeader.split(' ')
+        const [bearer, token] = authHeader.split(' ');
         if (!token){
             return res.status(404).json({
                 erro: true,

@@ -5,8 +5,7 @@ import api from "../../services/api";
 import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router-dom";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import { NavBar } from "../../components/UI/NavBar/NavBar";
 import { ListPlus } from "phosphor-react";
 import { SignOut } from "phosphor-react";
 import { NotePencil } from "phosphor-react";
@@ -30,19 +29,19 @@ export const ListProducts = () => {
 
     const confirmDelete = (Products) => {
         confirmAlert({
-          title: "CAUTION !!!!",
+          title: "Atenção !",
           message:
-            "Are you absolutely sure you want to delete section " +
+            "Tem certeza que deseja excluir o produto: " +
             Products.id +
             "?",
           buttons: [
             {
-              label: "Yes",
+              label: "Sim",
               onClick: () => handleDelete(Products.id)
             },
             {
-              label: "No",
-              onClick: () => history.push("/Products")
+              label: "Não",
+              onClick: () => history.push("/listaprodutos")
             }
           ]
         });
@@ -119,27 +118,15 @@ export const ListProducts = () => {
     }, [])
 
     return(
+      <>
+      <NavBar />
         <div className="tabela">
-      <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand href="/">Consulta Categorias</Navbar.Brand>
-          <Nav>
-            <Nav.Link className="aling-text" href="/categorias">
-              Categorias
-            </Nav.Link>
-            <Nav.Link href="/listacategorias">Lista de Categorias</Nav.Link>
-            <Nav.Link href="/profile">Perfil</Nav.Link>
-            <Nav.Link href="/produtos/novo">Produtos</Nav.Link>
-            <Nav.Link href="/">Sair</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
       <Container className="bg-ListCategories">
-        <h1 className="h1-ListCategories">Lista de Categorias</h1>
+        <h1 className="h1-ListCategories">Lista de Produtos</h1>
         <div className="aling-buttons">
           <Button className="button-width " variant="success">
-            <Link className="btnLinkList" to="/categories/create">
-              Nova Categoria
+            <Link className="btnLinkList" to="/products/create">
+              Novo Produto
               <ListPlus className="icon-listplus" color="#fff" size={22} />
             </Link>
           </Button>
@@ -155,6 +142,8 @@ export const ListProducts = () => {
             <tr>
               <th>ID</th>
               <th>Name</th>
+              <th>Quantidade</th>
+              <th>Preço</th>
               <th>Descrição</th>
               <th>CategoriaId</th>
               <th>Funções</th>
@@ -165,13 +154,15 @@ export const ListProducts = () => {
               <tr key={Products.id}>
                 <td>{Products.id}</td>
                 <td>{Products.name}</td>
+                <td>{Products.quantity}</td>
+                <td>{Products.price}</td>
                 <td>{Products.description}</td>
                 <td>{Products.categorieId}</td>
                 <td>
                   <Button className="button-warning" variant="warning">
                     <Link
                       className="btnLink"
-                      to={"products/update/" + Products.id}
+                      to={"/products/update/" + Products.id}
                     >
                       Editar
                       <NotePencil size={18} color="#000" />
@@ -191,5 +182,6 @@ export const ListProducts = () => {
         </Table>
       </Container>
     </div>
+    </>
     )
 }

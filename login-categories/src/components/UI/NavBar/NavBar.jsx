@@ -17,8 +17,7 @@ export const NavBar = () => {
             </Nav.Link>
             <Nav.Link href="/listacategorias">Lista de Categorias</Nav.Link>
             <Nav.Link href="/profile">Perfil</Nav.Link>
-            <Nav.Link href="/produtos/novo">Produtos</Nav.Link>
-            <Nav.Link href="/">Sair</Nav.Link>
+            <Nav.Link href="/listaprodutos">Produtos</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

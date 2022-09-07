@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 import { Atom } from "phosphor-react";
 import { BsGithub } from "react-icons/bs";
 import { BiUserCircle } from "react-icons/bi";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import { NavBar } from "../../components/UI/NavBar/NavBar";
 import "./style.css";
 
 export const Categories = () => {
@@ -14,17 +12,8 @@ export const Categories = () => {
   const { authenticated, handleLogout } = useContext(Context);
 
   return (
-    <div>
-      <Navbar bg="dark" variant="dark">
-        <Container className="aling-navbar">
-          <Navbar.Brand href="/">Consulta Categorias</Navbar.Brand>
-          <Nav>
-            <Nav.Link className="aling-text" href="/categorias">Categorias</Nav.Link>
-            <Nav.Link href="/listacategorias">Lista de Categorias</Nav.Link>
-            <Nav.Link href="/profile">Perfil</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
+    <>
+    <NavBar />
       <div className="aling-body">
         <Atom className="aling-atom" size={80} color="rgb(0, 162, 255)" />
           <h3 className="title">
@@ -50,6 +39,6 @@ export const Categories = () => {
           </h4>
           </div>
         </div>
-      </div>
+      </>
   );
 };

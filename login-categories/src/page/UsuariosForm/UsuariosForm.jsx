@@ -158,11 +158,11 @@ export const UsuariosFormView = () => {
           )}
 
           {status.loading ? (
-            <Button variant="primary" disabled type="submit">
+            <Button variant="dark" disabled type="submit">
               Enviando...
             </Button>
           ) : (
-            <Button variant="primary" type="submit">
+            <Button variant="dark" type="submit">
               Enviar
             </Button>
           )}

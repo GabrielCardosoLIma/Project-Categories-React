@@ -1,5 +1,6 @@
 const productsRoutes = require('express').Router();
 const Products = require('../controllers/products.controller');
+const { validarToken } = require('../middlewares/Auth')
 
 productsRoutes.get('/all', Products.findAll)
 

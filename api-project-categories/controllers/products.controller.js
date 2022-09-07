@@ -64,8 +64,8 @@ exports.create = async (req, res) => {
 }
 
 exports.update = async (req, res) => {
-    const { id } = req.body;
-    await Products.update(req.body, {where: {id}})
+    const { name } = req.body;
+    await Products.update(req.body, {where: {name}})
     .then(() => {
         return res.json({
             erro: false,
