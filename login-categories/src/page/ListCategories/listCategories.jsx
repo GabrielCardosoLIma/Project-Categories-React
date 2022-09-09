@@ -19,6 +19,8 @@ export const ListCategories = () => {
   const history = useHistory();
 
   const [data, setData] = useState([]);
+  const [page, setPage] = useState();
+  const [lastPage, setLastPage] = useState("")
   const [status, setStatus] = useState({
     type: "",
     mensagem: "",
@@ -106,6 +108,44 @@ export const ListCategories = () => {
     getUsers();
   }, []);
 
+  const getCategories = async (page) => {
+
+    if( page === undefined ) {
+        page = 1
+    }
+    setPage(page);
+
+    const valueToken = localStorage.getItem('token');
+    const headers = {
+        'headers': {
+            'Authorization': 'Bearer ' + valueToken
+        }
+    }
+
+    await api.get("/products/all/pages/" + page, headers)
+        .then( (response) => {
+            setData(response.data.products);
+            setLastPage(response.data.lastPage);
+            setStatus({loading: false})
+        }).catch( (err) => {
+            if(err.response){
+                setStatus({
+                    type:'error',
+                    mensagem: err.response.data.mensagem
+                })
+            } else {
+                setStatus({
+                    type:'error',
+                    mensagem: 'Erro: tente mais tarde...'
+                })
+            }
+        })
+}
+
+useEffect( () => {
+    getCategories ();
+}, [])
+
   return (
     <div className="tabela">
       <Navbar bg="dark" variant="dark">
@@ -174,6 +214,29 @@ export const ListCategories = () => {
             ))}
           </tbody>
         </Table>
+        <div>
+        { page !== 1
+                ? <Button className="style-button-name" variant="dark" type="button" onClick={ () => getCategories (1)}>Primeira</Button>
+                : <Button className="style-button-name" variant="dark" type="button" disabled>Primeira</Button>
+            }{" "}
+            { page !== 1
+                ? <Button className="style-button" variant="dark" type="button" onClick={ () => getCategories (page - 1)}>{page - 1}</Button>
+                : ""
+            }{" "}
+            <Button className="style-button" variant="dark" type="button" disabled>{page}</Button>{" "}
+            {/* { page !== lastPage
+                ? <Button className="style-button" variant="dark" type="button" onClick={ () => getCategories (page + 1)}>{page + 1}</Button>
+                : ""
+            }{" "} */}
+            { page + 1 <= lastPage
+                ? <Button className="style-button" variant="dark" type="button" onClick={ () => getCategories (page + 1)}>{page + 1}</Button>
+                : ""
+            }{" "}
+            { page !== lastPage 
+                ? <Button className="style-button-name" variant="dark" type="button" onClick={ () => getCategories (lastPage)}>Ultima</Button>
+                : <Button className="style-button-name" variant="dark" type="button" disabled>Ultima</Button>
+            }
+        </div>
       </Container>
     </div>
   );

@@ -14,7 +14,6 @@ body {
     height: 789px;
 }
 .h1-ListCategories{
-    margin: 20px 0;
     color: #fff;
 }
 .btnLink{
@@ -44,4 +43,10 @@ body {
 }
 .icon-listplus{
     margin-left: 5px;
+}
+.style-button{
+    width: 40px;
+}
+.style-button-name{
+    width: 80px;
 }
