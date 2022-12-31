@@ -188,15 +188,15 @@ useEffect( () => {
           </thead>
           <tbody>
             {data.map((Categories) => (
-              <tr key={Categories.id}>
-                <td>{Categories.id}</td>
+              <tr key={Categories._id}>
+                <td>{Categories._id}</td>
                 <td>{Categories.name}</td>
                 <td>{Categories.description}</td>
                 <td>
                   <Button className="button-warning" variant="warning">
                     <Link
                       className="btnLink"
-                      to={"categories/update/" + Categories.id}
+                      to={"categories/update/" + Categories._id}
                     >
                       Editar
                       <NotePencil size={18} color="#000" />

@@ -36,8 +36,8 @@ export function Login() {
 
   const loginSubmit = async (e) => {
     e.preventDefault();
-    // console.log(user.email);
-    // console.log(user.password);
+    console.log(user.email);
+    console.log(user.password);
     const headers = {
       "Content-Type": "application/json",
     };
@@ -58,7 +58,7 @@ export function Login() {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", response.data.user);
         signIn(true);
-        return history.push("/categorias");
+        return history.push("/listacategorias");
       })
       .catch((error) => {
         setStatus({
